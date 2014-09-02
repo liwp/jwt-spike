@@ -5,15 +5,17 @@
             [compojure.core :refer :all]
             [compojure.handler :as handler]
             [compojure.route :as route]
-            [ring.middleware.basic-authentication :refer [wrap-basic-authentication]]))
+            [ring.middleware.basic-authentication :refer [wrap-basic-authentication]]
+            [uuid.core :refer [rand-uuid]]))
 
 (def secret "secret")
 
 (defn create-claim
   [now]
-  {:iss "api.example.com"
-   :exp (plus now (days 1))
-   :iat now})
+  {:exp (plus now (days 1))
+   :iat now
+   :iss "api.example.com"
+   :sub (str (rand-uuid))})
 
 (defn create-jwt-token
   [claim secret]

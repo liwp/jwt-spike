@@ -109,6 +109,12 @@ access denied (jwt 2)
 
 (`(jwt 2)` here indicates that the JWT token validation failed)
 
+We would get this same result if the signing secret was changed. You
+can try this out by changing `secret` in `src/jwt_spike/handler.clj`
+to something else and executing the request with the valid token again
+(`lein ring server` should reload the file automagically).
+
+
 # Some notes
 
 ## Secret
@@ -130,6 +136,19 @@ that.
 
 I guess a decent expiration time for our web apps would be a week or
 two to avoid people having to log in too often.
+
+## Claims
+
+Related to the expiration time, we need to think about what we want
+the payload of the token to be (ie `claims`). The payload is a JSON
+object, so we can put whatever we want in it, as long as we don't
+collide with the [registered claim
+names](http://tools.ietf.org/html/draft-ietf-oauth-json-web-token-25#section-4.1).
+
+At the moment we use the `exp` (expiration time), `iat` (issued at),
+`iss` (issuer), and `sub` (subject), where issuer is set to
+`api.example.com` and subject is set to the user's ID.
+
 
 ## License
 

@@ -4,6 +4,7 @@
   :dependencies [[clj-jwt "0.0.10"]
                  [clj-time "0.8.0"]
                  [compojure "1.1.8"]
+                 [listora/uuid "0.1.2"]
                  [org.clojure/clojure "1.6.0"]
                  [ring-basic-authentication "1.0.5"]]
   :plugins [[lein-ring "0.8.11"]]
